@@ -1,0 +1,49 @@
+package cn.henryzhuhao.mainframe.frame.base;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.trello.rxlifecycle2.components.support.RxDialogFragment;
+
+import cn.henryzhuhao.mainframe.frame.base.action.BaseAction;
+
+/**
+ * Author : zhuhao
+ * Date : 4/9/2017
+ *
+ * @Last Modified Time :4/9/2017
+ * Description :
+ */
+
+public abstract class BaseDialog extends RxDialogFragment implements BaseAction{
+    public View view;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //initPresenter();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view=LayoutInflater.from(getContext()).inflate(getRootViewId(),null);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init(savedInstanceState);
+    }
+
+    @Override
+    public void init(Bundle savedInstanceState) {
+        initView();
+        initData(savedInstanceState);
+        initListener();
+    }
+}
